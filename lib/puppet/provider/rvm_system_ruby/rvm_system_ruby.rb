@@ -6,6 +6,7 @@ Puppet::Type.type(:rvm_system_ruby).provide(:rvm) do
   def create
     set_autolib_mode if resource.value(:autolib_mode)
     options = Array(resource[:build_opts])
+    options << '--verify_downloads 1'
     rvmcmd "install", resource[:name], *options
     set_default if resource.value(:default_use)
   end
